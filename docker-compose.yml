@@ -1,0 +1,39 @@
+version: '3.7'
+
+networks:
+  exbuilder:
+
+services:
+  postgres:
+    image: postgres:13.1
+    container_name: postgres
+    restart: unless-stopped
+    tty: true
+    ports: 
+      - "5432:5432"
+    volumes:
+      # - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./data:/var/lib/postgres/data
+    environment: 
+      POSTGRES_DATABASE: exbuilder
+      POSTGRES_USER: exbuilder
+      POSTGRES_PASSWORD: secret
+      POSTGRES_ROOT_PASSWORD: secret
+      SERVICE_TAGS: dev
+      SERVICE_NAME: postgres
+    networks:
+      - exbuilder
+ 
+  adminer:
+    image: adminer:latest
+    restart: always
+    container_name: adminer
+    environment: 
+      ADMINER_DEFAULT_SERVER: postgres
+      ADMINER_DESIGN: nicu
+    depends_on:
+      - postgres 
+    ports:
+      - 8081:8080
+    networks:
+      - exbuilder
