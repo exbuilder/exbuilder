@@ -37,3 +37,28 @@ services:
       - 8081:8080
     networks:
       - exbuilder
+
+  jupyter:
+    image: jupyter/datascience-notebook
+    environment:
+      - JUPYTER_TOKEN=exbuilder
+    volumes:
+      - ./analyses/jupyter-notebooks:/home/jovyan/work
+    ports:
+      - 8989:8888
+    container_name: jupyter
+    networks:
+      - exbuilder
+
+  rstudio:
+    environment:
+      - USER=exbuilder
+      - PASSWORD=password
+    image: "rocker/tidyverse:latest"
+    volumes:
+      - ./analyses:/var/www/html
+    container_name: rstudio
+    ports:
+      - 8787:8787
+    networks:
+      - exbuilder
