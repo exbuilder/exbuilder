@@ -7,7 +7,7 @@ CREATE SCHEMA exbuilder;
 
 -- create the runs table
 CREATE TABLE IF NOT EXISTS runs (
-    id SERIAL PRIMARY KEY,
+    id BIGSERIAL PRIMARY KEY,
     daterun TIMESTAMP,
     randomid VARCHAR, 
     participant VARCHAR,

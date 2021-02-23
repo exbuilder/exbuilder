@@ -17,6 +17,9 @@ Contribution guide
 # Code of conduct 
 Please be kind and welcoming to everyone.
 
+# Support
+exbuilder was made with support from a University of Pennsylvania Research Recovery Grant.
+
 # License
 exbuilder is open-source under the MIT license.
 

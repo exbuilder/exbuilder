@@ -46,7 +46,7 @@ var s,
 
         insertRun: function(data = s.run){
  
-            fetch('../php/insert_run.php', {
+            fetch('../exbuilder/php/insert_run.php', {
                 method: 'post',
                 body: JSON.stringify(data),
             })
@@ -55,7 +55,7 @@ var s,
         },
 
         updateRun: function(data){
-            fetch('../php/update_run.php', {
+            fetch('../exbuilder/php/update_run.php', {
                 method: 'post',
                 body: JSON.stringify( {
                         json_data: data,
