@@ -5,4 +5,6 @@
   $dbname = "exbuilder";
   $user = "exbuilder";
   $password = "password";
+  $runs_table = "exbuilder.runs";
+  $conditions_torun = "exbuilder.conditions_torun"
 ?>

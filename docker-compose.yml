@@ -33,6 +33,7 @@ services:
     
   postgres:
     image: postgres:10
+    command: ["postgres", "-c", "log_statement=all"]
     container_name: postgres
     restart: unless-stopped
     tty: true
