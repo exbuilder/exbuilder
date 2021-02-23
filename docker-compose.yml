@@ -4,6 +4,33 @@ networks:
   exbuilder:
 
 services:
+  webserver:
+    build:
+      context: .
+      dockerfile: ./docker/nginx/Dockerfile
+    container_name: nginx
+    ports:
+      - "8080:80"
+    volumes:
+      - ./02-experiments:/var/www/html:delegated
+    depends_on:
+      - php
+      - postgres
+    networks:
+      - exbuilder
+
+  php:
+    build:
+      context: .
+      dockerfile: ./docker/php/Dockerfile
+    container_name: php
+    volumes:
+      - ./02-experiments:/var/www/html:delegated
+    ports:
+      - "9000:9000"
+    networks:
+      - exbuilder
+    
   postgres:
     image: postgres:10
     container_name: postgres

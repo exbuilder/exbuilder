@@ -21,8 +21,8 @@ CREATE TABLE IF NOT EXISTS runs (
     notes TEXT
 );
 
--- create the torun table
-CREATE TABLE IF NOT EXISTS runs (
+-- create the conditions_torun table
+CREATE TABLE IF NOT EXISTS conditions_torun (
     id SERIAL PRIMARY KEY,
     experiment VARCHAR,
     condition VARCHAR
