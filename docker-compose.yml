@@ -5,27 +5,27 @@ networks:
 
 services:
   postgres:
-    image: postgres:13.1
+    image: postgres:10
     container_name: postgres
     restart: unless-stopped
     tty: true
     ports: 
       - "5432:5432"
     volumes:
-      # - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql
-      - ./data:/var/lib/postgres/data
+      - ./03-database/data:/var/lib/postgres/data
+      - ./03-database/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment: 
       POSTGRES_DATABASE: exbuilder
       POSTGRES_USER: exbuilder
-      POSTGRES_PASSWORD: secret
-      POSTGRES_ROOT_PASSWORD: secret
+      POSTGRES_PASSWORD: password
+      POSTGRES_ROOT_PASSWORD: password
       SERVICE_TAGS: dev
       SERVICE_NAME: postgres
     networks:
       - exbuilder
  
   adminer:
-    image: adminer:latest
+    image: adminer:4.8.0
     restart: always
     container_name: adminer
     environment: 
@@ -39,11 +39,11 @@ services:
       - exbuilder
 
   jupyter:
-    image: jupyter/datascience-notebook
+    image: jupyter/datascience-notebook:r-4.0.3
     environment:
-      - JUPYTER_TOKEN=exbuilder
+      - JUPYTER_TOKEN=password
     volumes:
-      - ./analyses/jupyter-notebooks:/home/jovyan/work
+      - ./04-analyses:/home/jovyan/work
     ports:
       - 8989:8888
     container_name: jupyter
@@ -51,14 +51,15 @@ services:
       - exbuilder
 
   rstudio:
+    image: "rocker/verse:4.0.4"
     environment:
-      - USER=exbuilder
+      - USERID=rstudio
       - PASSWORD=password
-    image: "rocker/tidyverse:latest"
     volumes:
-      - ./analyses:/var/www/html
-    container_name: rstudio
+      - ./04-analyses:/home/rstudio/work
     ports:
       - 8787:8787
+    container_name: rstudio
     networks:
       - exbuilder
+  
