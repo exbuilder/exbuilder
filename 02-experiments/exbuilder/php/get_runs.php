@@ -8,8 +8,9 @@
   $dbconn = pg_connect( "host=$host port=$port dbname=$dbname user=$user password=$password" )
       or die ("Could not connect to database\n");
 
-  // insert array to runs table
-  $res = pg_insert($dbconn, $runs_table, $data_array)
+  // update the runs table with the json data from the study
+  $res = pg_query_params($dbconn, "SELECT exbuilder.runs WHERE experiment = $1;",
+    array($data_array['json_data'], $data_array['randomid']))
     or die ("Could not update run with data\n");
 
 pg_close($dbconn);

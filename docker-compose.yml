@@ -25,12 +25,19 @@ services:
       dockerfile: ./docker/php/Dockerfile
     container_name: php
     volumes:
-      - ./02-experiments:/var/www/html:delegated
+      - ./${EXPERIMENTS_DIRECTORY}:/var/www/html:delegated
+    environment:
+      - DB_HOST=${DB_HOST}
+      - DB_PORT=${DB_PORT}
+      - DB_NAME=${DB_NAME}
+      - DB_USER=${DB_USER}
+      - DB_PASSWORD=${DB_PASSWORD}
+      - DB_RUNS_TABLE=${DB_RUNS_TABLE}
     ports:
       - "9000:9000"
     networks:
       - exbuilder
-    
+
   postgres:
     image: postgres:10
     command: ["postgres", "-c", "log_statement=all"]
@@ -38,17 +45,17 @@ services:
     restart: unless-stopped
     tty: true
     ports: 
-      - "5432:5432"
+      - "${DB_PORT}:${DB_PORT}"
     volumes:
-      - ./03-database/data:/var/lib/postgres/data
-      - ./03-database/init.sql:/docker-entrypoint-initdb.d/init.sql
+      - ./${DATABASE_DIRECTORY}/data:/var/lib/postgres/data
+      - ./${DATABASE_DIRECTORY}/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment: 
-      POSTGRES_DATABASE: exbuilder
-      POSTGRES_USER: exbuilder
-      POSTGRES_PASSWORD: password
-      POSTGRES_ROOT_PASSWORD: password
+      POSTGRES_DATABASE: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_ROOT_PASSWORD: ${DB_PASSWORD}
       SERVICE_TAGS: dev
-      SERVICE_NAME: postgres
+      SERVICE_NAME: ${DB_HOST}
     networks:
       - exbuilder
  
@@ -71,7 +78,7 @@ services:
     environment:
       - JUPYTER_TOKEN=password
     volumes:
-      - ./04-analyses:/home/jovyan/work
+      - ./${ANALYSES_DIRECTORY}:/home/jovyan/work
     ports:
       - 8989:8888
     container_name: jupyter
@@ -84,7 +91,7 @@ services:
       - USERID=rstudio
       - PASSWORD=password
     volumes:
-      - ./04-analyses:/home/rstudio/work
+      - ./${ANALYSES_DIRECTORY}:/home/rstudio/work
     ports:
       - 8787:8787
     container_name: rstudio

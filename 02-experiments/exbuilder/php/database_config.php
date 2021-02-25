@@ -1,10 +1,10 @@
 <?php
-// for local development only; we you deploy, do not store or track this file in your github repo
-  $host = "postgres";
-  $port = "5432";
-  $dbname = "exbuilder";
-  $user = "exbuilder";
-  $password = "password";
-  $runs_table = "exbuilder.runs";
-  $conditions_torun = "exbuilder.conditions_torun"
+
+  $host = getenv('DB_HOST');
+  $port = getenv('DB_PORT');
+  $dbname = getenv('DB_NAME');
+  $user = getenv('DB_USER');
+  $password = getenv('DB_PASSWORD');
+  $runs_table = getenv('DB_RUNS_TABLE');
+  
 ?>
