@@ -1,6 +1,4 @@
 <?php
-  // update the database run with the json data 
-  // this path points to our configuration file.
   include('database_config.php');
 
   // get an array that has key "json_data" and value "the json array from jspsych"

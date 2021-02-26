@@ -1,0 +1,39 @@
+{   "url_params": [
+        "experiment", 
+        "condition",
+        "researcher",
+        "location", 
+        "sourcedb",
+        "participant"
+    ],
+    "randomid": {
+        "length": 12
+    },
+    "landing_page": {
+        "title": "exbuilder",
+        "description": "Welcome to exbuilder's webserver. Customize your landing page with config-exbuilder.json",
+        "global_options": {
+            "researcher": ["dorothy", "tin man", "scarcrow", "lion"],
+            "location": ["oz", "kansas"],
+            "sourcedb": ["prolific", "mturk", "sona", "salesforce"]
+        },
+        "experiments": [
+            {
+                "name": "experiment 1 jspsych example",
+                "folder-name": "experiment1-jspsych",
+                "condition": ["condition 1", "condition 2"]
+            },
+            {
+                "name": "experiment 2 pcibex example",
+                "folder-name": "experiment2-pcibex",
+                "condition": ["condition 1", "condition 2"],
+                "options": {
+                    "researcher": ["auntie em", "uncle henry", "glinda"],
+                    "location": ["online"],
+                    "sourcedb": ["prolific"]
+                }
+            }
+
+        ]
+    }
+}
