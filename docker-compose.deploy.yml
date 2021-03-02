@@ -1,7 +1,6 @@
 version: '3.7'
 
 networks:
-  exbuilder:
   default: 
     external: 
       name: deployer_default
@@ -19,8 +18,7 @@ services:
     depends_on:
       - php
       - postgres
-    networks:
-      - exbuilder
+
 
   php:
     build:
@@ -38,8 +36,6 @@ services:
       - DB_RUNS_TABLE=${DB_RUNS_TABLE}
     ports:
       - "9000:9000"
-    networks:
-      - exbuilder
 
   postgres:
     image: postgres:10
@@ -59,7 +55,5 @@ services:
       POSTGRES_ROOT_PASSWORD: ${DB_PASSWORD}
       SERVICE_TAGS: dev
       SERVICE_NAME: postgres
-    networks:
-      - exbuilder
  
   
