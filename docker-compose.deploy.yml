@@ -17,7 +17,6 @@ services:
       - ./02-experiments:/var/www/html:delegated
     depends_on:
       - php
-      - postgres
 
 
   php:
