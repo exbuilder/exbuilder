@@ -1,4 +1,5 @@
-{   "url_params": [
+{  
+    "url_params": [
         "experiment", 
         "condition",
         "researcher",
@@ -6,34 +7,58 @@
         "sourcedb",
         "participant"
     ],
-    "randomid": {
-        "length": 12
-    },
     "landing_page": {
         "title": "exbuilder",
         "description": "Welcome to exbuilder's webserver. Customize your landing page with config-exbuilder.json",
-        "global_options": {
-            "researcher": ["dorothy", "tin man", "scarcrow", "lion"],
-            "location": ["oz", "kansas"],
-            "sourcedb": ["prolific", "mturk", "sona", "salesforce"]
+        "placeholder_text": "Select an experiment to run"
+    },
+    "randomid": {
+        "length": 12
+    },
+    "new_url_params":[
+        {
+            "name": "researcher",
+            "placeholder_text": "Select a researcher",
+            "kind": "select",
+            "options": ["dorothy", "tin man", "scarecrow", "lion"]
         },
-        "experiments": [
-            {
-                "name": "experiment 1 jspsych example",
-                "folder-name": "experiment1-jspsych",
-                "condition": ["condition 1", "condition 2"]
-            },
-            {
-                "name": "experiment 2 pcibex example",
-                "folder-name": "experiment2-pcibex",
-                "condition": ["condition 1", "condition 2"],
-                "options": {
-                    "researcher": ["auntie em", "uncle henry", "glinda"],
-                    "location": ["online"],
-                    "sourcedb": ["prolific"]
-                }
+        {
+            "name": "location",
+            "placeholder_text": "Select a location",
+            "kind": "select",
+            "options": ["oz", "kansas"]
+        },
+        {
+            "name": "sourcedb",
+            "placeholder_text": "Select a source database",
+            "kind": "select",
+            "options": ["prolific", "mturk", "sona", "salesforce"]
+        },
+        {
+            "name": "participant",
+            "placeholder_text": "Participant ID from source database",
+            "kind": "input"        }
+    ],
+    "experiments": [
+        {
+            "name": "experiment 1 jspsych example",
+            "folder-name": "experiment1-jspsych",
+            "condition": [
+                {"name": "condition 1"},
+                {"name": "condition 1"}
+            ],
+            "override_options": {}
+        },
+        {
+            "name": "experiment 2 pcibex example",
+            "folder-name": "experiment2-pcibex",
+            "condition": ["condition 1", "condition 2"],
+            "override_options": {
+                "researcher": ["auntie em", "uncle henry", "glinda"],
+                "location": ["online"],
+                "sourcedb": ["prolific"]
             }
+        }
 
-        ]
-    }
+    ]
 }

@@ -2,72 +2,35 @@
 <html>
   <head>
     <title>exbuilder</title>
+
     <!-- Bootstrap 5 -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
-    <script src="../exbuilder/exbuilder.js"></script> <!-- EXBUILDER JS  -->
+
+    <!-- required scripts for exbuilder's landing page  -->
+    <script src="../exbuilder/js/exbuilder-landing-page.js"></script> 
+
   </head>
   <body>
     <div class="container position-absolute top-50 start-50 translate-middle">
         <div class="row justify-content-md-center">
             <div class="col-sm-4 text-center">
-                <h1 id="exbuilder-title" class="display-4 text-center">exbuilder</h1>
-                <p id="exbuilder-description" class="lead text-center">Welcome to exbuilder's webserver. Customize your landing page with config-exbuilder.json</p>
+                <h1 id="exbuilder-title" class="display-4 text-center"></h1>
+                <p id="exbuilder-description" class="lead text-center"></p>
             </div>
         </div>
         <div class="row justify-content-md-center">
             <div class="card col-sm-4">
                 <div class="card-body">
-                    <form>
-                        <div class="row mb-3">
-                            <select class="form-select">
-                                <option>experiment</option>
-                                <option>experiment 1 jspsych</option>
-                                <option>experiment 2 pcibex</option>
-                              </select>
-                        </div>
-                        <div class="row mb-3">
-                            <select class="form-select">
-                                <option>researcher</option>
-                                <option>dorothy</option>
-                                <option>tin man</option>
-                              </select>
-
-                        </div>
-                        <div class="row mb-3">
-                            <select class="form-select">
-                                <option>location</option>
-                                <option>oz</option>
-                                <option>kansas</option>
-                              </select>
-
-                        </div>
-                        <div class="row mb-3">
-                            <select class="form-select">
-                                <option>source database</option>
-                                <option>prolific</option>
-                                <option>sona</option>
-                                <option>salesforce</option>
-
-                              </select>
-
-                        </div>
-                        <div class="row mb-3">
-                            <input class="form-control" type="text" placeholder="participant id" aria-label="default input example">
-
-                        </div>
-
-                            <button type="submit" class="btn btn-primary">Copy URL</button>
-                            <button type="submit" class="btn btn-primary">Run</button>
-
+                    <form id="exbuilder-form">
                       </form>
                 </div>
               </div>
-
         </div>
     </div>
   </body>
 </html>
 <script>
-    Exbuilder.init("landingpage")
+    ExbuilderLandingPage.init()
+    // ExbuilderLandingPage.init("specific-config-file.json")
 </script>
