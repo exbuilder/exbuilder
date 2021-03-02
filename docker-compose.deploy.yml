@@ -1,8 +1,9 @@
 version: '3.7'
 
 networks:
-  deployer:
-    external: true
+  default: 
+    deployer:
+      external: true
 
 services:
   webserver:
