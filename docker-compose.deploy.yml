@@ -3,7 +3,7 @@ version: '3.7'
 networks:
   default: 
     external: 
-      name: deployer
+      name: exbuilder_deployer
 
 services:
   webserver:
