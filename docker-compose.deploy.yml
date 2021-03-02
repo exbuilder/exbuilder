@@ -18,7 +18,7 @@ services:
       - php
       - postgres
     networks:
-      - exbuilder
+      - deployer
 
   php:
     build:
@@ -37,7 +37,7 @@ services:
     ports:
       - "9000:9000"
     networks:
-      - exbuilder
+      - deployer
 
   postgres:
     image: postgres:10
@@ -58,6 +58,6 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: postgres
     networks:
-      - exbuilder
+      - deployer
  
   
