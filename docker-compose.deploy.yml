@@ -1,9 +1,10 @@
 version: '3.7'
 
 networks:
+  exbuilder:
   default: 
-    deployer:
-      external: true
+    external: 
+      name: deployer_default
 
 services:
   webserver:
@@ -19,7 +20,7 @@ services:
       - php
       - postgres
     networks:
-      - deployer
+      - exbuilder
 
   php:
     build:
@@ -38,7 +39,7 @@ services:
     ports:
       - "9000:9000"
     networks:
-      - deployer
+      - exbuilder
 
   postgres:
     image: postgres:10
@@ -59,6 +60,6 @@ services:
       SERVICE_TAGS: dev
       SERVICE_NAME: postgres
     networks:
-      - deployer
+      - exbuilder
  
   
