@@ -1,11 +1,11 @@
 <?php
-  include('database_config.php');
+  include('config.php');
 
   // get an array that has key "json_data" and value "the json array from jspsych"
   $data_array = json_decode(file_get_contents('php://input'), true);
 
   // connect to database
-  $dbconn = pg_connect( "host=$host port=$port dbname=$dbname user=$user password=$password" )
+  $dbconn = pg_connect( "host=$database->host port=$database->port dbname=$database->dbname user=$database->user password=$database->password" )
       or die ("Could not connect to database\n");
 
   // update the runs table with the json data from the study

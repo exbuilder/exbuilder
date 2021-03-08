@@ -7,12 +7,17 @@
     <script src="jspsych-6.3.0/plugins/jspsych-image-keyboard-response.js"></script>
     <script src="jspsych-6.3.0/plugins/jspsych-preload.js"></script>
     <script src="../exbuilder/js/exbuilder.js"></script> <!-- EXBUILDER JS  -->
+    <script src="../exbuilder/js/exbuilder-audio-recorder.js"></script> <!-- EXBUILDER JS  -->
+
     <link href="jspsych-6.3.0/css/jspsych.css" rel="stylesheet" type="text/css">
   </head>
   <body></body>
   <script>
     /* INITIALIZE EXBUILDER -- let exbuilder know you want to use it */
     Exbuilder.init();
+    ExbuilderAudioRecorder.init();
+
+
 
     /* create timeline */
     var timeline = [];
@@ -29,8 +34,8 @@
       type: "html-keyboard-response",
       stimulus: "Welcome to the experiment. Press any key to begin.",
       on_finish: function(){ 
-          Exbuilder.insertRun(); // ADDS RUN TO EXBUILDER'S DATABASE
-        } 
+        ExbuilderAudioRecorder.startRecording();
+      } 
     };
     timeline.push(welcome);
 
@@ -51,7 +56,12 @@
         </div>
         <p>Press any key to begin.</p>
       `,
-      post_trial_gap: 2000
+      post_trial_gap: 2000,
+      on_finish: function(){
+         // Exbuilder.insertRun(); // ADDS RUN TO EXBUILDER'S DATABASE
+        ExbuilderAudioRecorder.stopRecording("new_file_name");
+        //Exbuilder.postMedia();
+      }
     };
     timeline.push(instructions);
 

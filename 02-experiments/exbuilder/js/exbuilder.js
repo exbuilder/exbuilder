@@ -2,7 +2,7 @@ var s,
     Exbuilder = {
         settings: {
             config: {}, // holds the config-exbuilder.json
-            run: "" // holds the experiment the user selects
+            run: {"experiment": 1, "condition": 2} // holds the experiment the user selects
         },
 
         init: function(config_file = "config-exbuilder.json"){
@@ -63,6 +63,14 @@ var s,
                         randomid: s.run.randomid
                     })
             })
+            .then(result => {console.log('Success:', result);})
+            .catch(error => {console.error('Error:', error);});
+        },
+
+        postMedia: function(){
+
+            // fetch the config file 
+            fetch('../exbuilder/php/post_media.php')
             .then(result => {console.log('Success:', result);})
             .catch(error => {console.error('Error:', error);});
         },

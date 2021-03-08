@@ -1,5 +1,5 @@
 <?php
-  include('database_config.php');
+  include('config.php');
 
   // get JSON and decode to PHP array
   $data_array = json_decode(file_get_contents('php://input'), true);
