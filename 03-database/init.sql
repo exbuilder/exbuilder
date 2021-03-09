@@ -2,11 +2,8 @@
 DROP SCHEMA IF EXISTS exbuilder;
 CREATE SCHEMA exbuilder;
 
--- using the schema
-\c exbuilder;
-
 -- create the runs table
-CREATE TABLE IF NOT EXISTS runs (
+CREATE TABLE IF NOT EXISTS exbuilder.runs (
     id BIGSERIAL PRIMARY KEY,
     daterun TIMESTAMP,
     randomid VARCHAR, 
@@ -20,10 +17,3 @@ CREATE TABLE IF NOT EXISTS runs (
     exclude BOOLEAN,
     notes TEXT
 );
-
--- create the conditions_torun table
-CREATE TABLE IF NOT EXISTS conditions_torun (
-    id SERIAL PRIMARY KEY,
-    experiment VARCHAR,
-    condition VARCHAR
-)

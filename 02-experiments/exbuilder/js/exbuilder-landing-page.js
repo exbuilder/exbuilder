@@ -1,15 +1,12 @@
-var s,
-    ExbuilderLandingPage = {
+var ExbuilderLandingPage = {
 
-        settings: {
-            config: {}, // holds the config-exbuilder.json
-            selectedExperiment: "", // holds the experiment the user selects
-        },
+        config: {}, // holds the config-exbuilder.json
+        selectedExperiment: "", // holds the experiment the user selects
+        queryString: "",
 
         init: function(config_file = "config-exbuilder.json"){
 
             //initalize settings and fetch the config file
-            s = this.settings;
             this.getConfig(config_file);
         },
 
@@ -25,7 +22,7 @@ var s,
             })
             .then(response => response.json())
             .then(data => {
-                s.config = data; 
+                this.config = data; 
                 this.makeLandingPage();
             }) 
         },
@@ -33,8 +30,8 @@ var s,
         makeLandingPage: function(){
 
             // set the title and description with config file
-            document.getElementById('exbuilder-title').innerHTML = s.config.landing_page.title;
-            document.getElementById('exbuilder-description').innerHTML = s.config.landing_page.description;
+            document.getElementById('exbuilder-title').innerHTML = this.config.landing_page.title;
+            document.getElementById('exbuilder-description').innerHTML = this.config.landing_page.description;
 
             // create the experiment selector
             this.makeExperimentSelector();
@@ -43,7 +40,7 @@ var s,
         makeExperimentSelector: function(){
 
             // create experiment selector, pulling options from the experiments object 
-            let options = s.config.experiments.map(function(experiment){ return experiment.name;})
+            let options = this.config.experiments.map(function(experiment){ return experiment.name;})
             this.makeSelectElement('exbuilder-experiment', options, "pick one");
 
             // bind UI actions so we can collect which experiment they select client-side
@@ -54,7 +51,7 @@ var s,
 
             // when the user changes the experiment selection, make the form
             document.querySelector('#exbuilder-experiment').addEventListener('change', function(){
-                s.selectedExperiment = this.value;
+                this.selectedExperiment = this.value;
                 ExbuilderLandingPage.makeExperimentForm();
             });
         },
@@ -65,7 +62,7 @@ var s,
             this.makeSelectElement("id", ['condition 1', 'condition 2'], "pick one");
 
             // add the rest of the url parameters 
-            s.config.new_url_params.forEach(
+            this.config.new_url_params.forEach(
                 (parameter, index) => {
                     switch (parameter.kind){
                         case "select":
@@ -76,7 +73,9 @@ var s,
                             break;
                     }
                 }
-            )           
+            );
+            
+            this.makeButton();
         },
 
         makeSelectElement: function(name, options, placeholder_text){
@@ -128,6 +127,30 @@ var s,
 
             //return the div so we can append children
             return div;
+        },
+
+        makeButton: function(){
+
+            let div = this.makeRowDiv();
+
+            let btn = document.createElement('button');
+            btn.setAttribute('type', "button");
+            btn.setAttribute('class', "btn btn-primary");
+            btn.innerHTML = "Run experiment";
+            // btn.setAttribute('id', );
+            div.appendChild(btn);
+
+
+        },
+
+        createQueryString: function(){
+
+            let form = document.forms[0];
+            let formData = new FormData(form);
+
+            let search = new URLSearchParams(formData);
+            this.queryString = search.toString();
+
         }
     }
 

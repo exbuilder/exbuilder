@@ -15,9 +15,9 @@
   <script>
     /* INITIALIZE EXBUILDER -- let exbuilder know you want to use it */
     Exbuilder.init();
+
+    /* INITIALIZE EXBUILDER's AUDIO RECORDER */
     ExbuilderAudioRecorder.init();
-
-
 
     /* create timeline */
     var timeline = [];
@@ -34,7 +34,6 @@
       type: "html-keyboard-response",
       stimulus: "Welcome to the experiment. Press any key to begin.",
       on_finish: function(){ 
-        ExbuilderAudioRecorder.startRecording();
       } 
     };
     timeline.push(welcome);
@@ -59,8 +58,6 @@
       post_trial_gap: 2000,
       on_finish: function(){
          // Exbuilder.insertRun(); // ADDS RUN TO EXBUILDER'S DATABASE
-        ExbuilderAudioRecorder.stopRecording("new_file_name");
-        //Exbuilder.postMedia();
       }
     };
     timeline.push(instructions);
@@ -80,6 +77,10 @@
       },
       data: {
         task: 'fixation'
+      },
+      on_finish: function(){
+        // START RECORDING AT THE FIXATION POINT
+        ExbuilderAudioRecorder.startRecording();
       }
     }
 
@@ -93,6 +94,8 @@
       },
       on_finish: function(data){
         data.correct = jsPsych.pluginAPI.compareKeys(data.response, data.correct_response);
+        // STOP RECORDING AT THE FIXATION POINT
+        ExbuilderAudioRecorder.stopRecording(Exbuilder.run.randomid+"/trial_"+ExbuilderAudioRecorder.trial+".wav");
       }
     }
 

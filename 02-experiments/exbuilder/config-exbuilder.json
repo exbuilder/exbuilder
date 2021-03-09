@@ -37,7 +37,8 @@
         {
             "name": "participant",
             "placeholder_text": "Participant ID from source database",
-            "kind": "input"        }
+            "kind": "input"       
+         }
     ],
     "experiments": [
         {
