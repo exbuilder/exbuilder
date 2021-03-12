@@ -27,7 +27,7 @@ services:
     volumes:
       - ./${EXPERIMENTS_DIRECTORY}:/var/www/html:delegated
     environment:
-      - DB_HOST=postgres
+      - DB_HOST=${DB_HOST}
       - DB_PORT=${DB_PORT}
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
@@ -80,7 +80,7 @@ services:
   jupyter:
     image: jupyter/datascience-notebook:r-4.0.3
     environment:
-      - JUPYTER_TOKEN=password
+      - JUPYTER_TOKEN=${JUPYTER_TOKEN}
       - JUPYTER_ENABLE_LAB=yes
 
     volumes:
@@ -95,7 +95,7 @@ services:
     image: "rocker/verse:4.0.4"
     environment:
       - USERID=rstudio
-      - PASSWORD=password
+      - PASSWORD=${RSTUDIO_PASSWORD}
     volumes:
       - ./${ANALYSES_DIRECTORY}:/home/rstudio/work
     ports:
