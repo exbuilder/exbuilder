@@ -8,7 +8,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
 
     <!-- required scripts for exbuilder's landing page  -->
-    <script src="../exbuilder/js/exbuilder-landing-page.js"></script> 
+    <script src="../exbuilder/js/exbuilder-url-generator.js"></script> 
 
   </head>
   <body>
@@ -23,6 +23,9 @@
             <div class="card col-sm-4">
                 <div class="card-body">
                     <form id="exbuilder-form">
+                      <div class="row mb-3">
+                        <input id="exbuilder-project" class="form-control" type="text" name='project' readonly>
+                      </div>
                       </form>
                 </div>
               </div>
@@ -31,6 +34,6 @@
   </body>
 </html>
 <script>
-    ExbuilderLandingPage.init()
-    // ExbuilderLandingPage.init("specific-config-file.json")
+    ExbuilderURLGenerator.init()
+    //ExbuilderURLGenerator.init("specific-config-file.json")
 </script>

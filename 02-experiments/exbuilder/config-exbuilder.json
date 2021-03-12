@@ -1,12 +1,9 @@
 {  
-    "url_params": [
-        "experiment", 
-        "condition",
-        "researcher",
-        "location", 
-        "sourcedb",
-        "participant"
-    ],
+    "project": {
+        "name": "Your Project Name",
+        "description": "brief description of your project for your records."
+
+    },
     "landing_page": {
         "title": "exbuilder",
         "description": "Welcome to exbuilder's webserver. Customize your landing page with config-exbuilder.json",
@@ -15,7 +12,7 @@
     "randomid": {
         "length": 12
     },
-    "new_url_params":[
+    "url_params":[
         {
             "name": "researcher",
             "placeholder_text": "Select a researcher",
@@ -40,26 +37,60 @@
             "kind": "input"       
          }
     ],
-    "experiments": [
+    "experiments": 
         {
-            "name": "experiment 1 jspsych example",
-            "folder-name": "experiment1-jspsych",
-            "condition": [
-                {"name": "condition 1"},
-                {"name": "condition 1"}
-            ],
-            "override_options": {}
-        },
-        {
-            "name": "experiment 2 pcibex example",
-            "folder-name": "experiment2-pcibex",
-            "condition": ["condition 1", "condition 2"],
-            "override_options": {
-                "researcher": ["auntie em", "uncle henry", "glinda"],
-                "location": ["online"],
-                "sourcedb": ["prolific"]
+            "experiment1": {
+                "name": "experiment 1 jspsych example",
+                "path": "experiment1-jspsych/experiment.html",
+                "conditions": {
+                    "condition1": {
+                        "description": "this condition is this",
+                        "n": 20,
+                        "exclusions": 2
+                    },
+                    "condition2": {
+                        "description": "this condition is that",
+                        "n": 20,
+                        "exclusions": 2
+                    }
+                }
+            },
+            "experiment2": {
+                "name": "experiment 2 jspsych recordaudio example",
+                "path": "experiment2-jspsych-recordaudio/experiment.html",
+                "conditions": {
+                    "condition1": {
+                        "description": "this condition is this",
+                        "n": 20,
+                        "exclusions": 2
+                    },
+                    "condition2": {
+                        "description": "this condition is that",
+                        "n": 20,
+                        "exclusions": 2
+                    }
+                }
+
+            },
+            "experiment3": {
+                "name": "experiment 3 pcibex example",
+                "path": "experiment3-pcibex/experiment.html",
+                "conditions": {
+                    "condition1": {
+                        "description": "this condition is this",
+                        "n": 20,
+                        "exclusions": 2
+                    },
+                    "condition2": {
+                        "description": "this condition is that",
+                        "n": 20,
+                        "exclusions": 2
+                    }
+                }
+
             }
+           
         }
 
-    ]
+    
 }

@@ -51,7 +51,7 @@ services:
     ports: 
       - "${DB_PORT}:${DB_PORT}"
     volumes:
-      - ./${DATABASE_DIRECTORY}/data:/var/lib/postgresql/data
+      # - ./${DATABASE_DIRECTORY}/data:/var/lib/postgresql/data
       - ./${DATABASE_DIRECTORY}/init.sql:/docker-entrypoint-initdb.d/init.sql
     environment: 
       POSTGRES_DATABASE: ${DB_NAME}
