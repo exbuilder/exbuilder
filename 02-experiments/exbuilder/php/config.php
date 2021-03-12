@@ -25,6 +25,7 @@
     'user' => getenv('DB_USER'),
     'password' => getenv('DB_PASSWORD'),
     'runs_table' => getenv('DB_RUNS_TABLE'),
+    'sslmode' =>getenv('DB_SSLMODE')
   ];
 
   // $host = getenv('DB_HOST');
