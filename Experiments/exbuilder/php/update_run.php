@@ -9,8 +9,8 @@
       or die ("Could not connect to database\n");
 
   // update the runs table with the json data from the study
-  $res = pg_query_params($dbconn, "UPDATE $3 SET data = $1 WHERE randomid = $2;",
-    array($data_array['json_data'], $data_array['randomid'], $databse->runs_table))
+  $res = pg_query_params($dbconn, "UPDATE experiments.runs SET data = $1 WHERE randomid = $2;",
+    array($data_array['json_data'], $data_array['randomid']))
     or die ("Could not update run with data\n");
 
   pg_close($dbconn);

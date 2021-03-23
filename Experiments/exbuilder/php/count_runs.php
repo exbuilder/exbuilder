@@ -9,8 +9,8 @@
       or die ("Could not connect to database\n");
 
   // update the runs table with the json data from the study
-  $res = pg_query_params($dbconn, "SELECT condition, COUNT(condition) FROM $2 WHERE experiment = $1 AND participant != '0' GROUP BY condition;",
-    array($_GET['experiment'], $database->runs_table))
+  $res = pg_query_params($dbconn, "SELECT condition, COUNT(condition) FROM experiments.runs WHERE experiment = $1 AND participant != '0' GROUP BY condition;",
+    array($_GET['experiment']))
     or die ("Could not count runs\n");
 
   //var_dump($res);

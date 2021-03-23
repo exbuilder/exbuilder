@@ -24,7 +24,7 @@
     'dbname' => getenv('DB_NAME'),
     'user' => getenv('DB_USER'),
     'password' => getenv('DB_PASSWORD'),
-    'runs_table' => getenv('DB_RUNS_TABLE'),
+    'runs_table' => 'experiments.runs',
     'sslmode' =>getenv('DB_SSLMODE')
   ];
 
