@@ -45,13 +45,11 @@
                 "conditions": {
                     "condition1": {
                         "description": "this condition is this",
-                        "n": 20,
-                        "exclusions": 2
+                        "n": 20
                     },
                     "condition2": {
                         "description": "this condition is that",
-                        "n": 20,
-                        "exclusions": 2
+                        "n": 20
                     }
                 }
             },
@@ -61,36 +59,15 @@
                 "conditions": {
                     "condition1": {
                         "description": "this condition is this",
-                        "n": 20,
-                        "exclusions": 2
+                        "n": 20
                     },
                     "condition2": {
                         "description": "this condition is that",
-                        "n": 20,
-                        "exclusions": 2
-                    }
-                }
-
-            },
-            "experiment3": {
-                "name": "experiment 3 pcibex example",
-                "path": "experiment3-pcibex/experiment.html",
-                "conditions": {
-                    "condition1": {
-                        "description": "this condition is this",
-                        "n": 20,
-                        "exclusions": 2
-                    },
-                    "condition2": {
-                        "description": "this condition is that",
-                        "n": 20,
-                        "exclusions": 2
+                        "n": 20
                     }
                 }
 
             }
            
-        }
-
-    
+        } 
 }

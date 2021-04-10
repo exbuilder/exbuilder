@@ -11,7 +11,7 @@ services:
     ports:
       - "8080:80"
     volumes:
-      - ./{EXPERIMENTS_DIRECTORY}:/var/www/html:delegated
+      - ./${EXPERIMENTS_DIRECTORY}:/var/www/html:delegated
     depends_on:
       - php
       - postgres
@@ -29,7 +29,8 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
-      - DB_RUNS_TABLE=experiments.runs
+      - DB_TABLE=${DB_TABLE}
+      - DB_SSLMODE=${DB_SSLMODE}
       - S3_ENDPOINT=${S3_ENDPOINT}
       - S3_REGION=${S3_REGION}
       - S3_KEY=${S3_KEY}
@@ -59,23 +60,9 @@ services:
       SERVICE_NAME: postgres
     networks:
       - exbuilder
- 
-  adminer:
-    image: adminer:4.8.0
-    restart: always
-    container_name: adminer
-    environment: 
-      ADMINER_DEFAULT_SERVER: postgres
-      ADMINER_DESIGN: nicu
-    depends_on:
-      - postgres 
-    ports:
-      - 8081:8080
-    networks:
-      - exbuilder
 
   jupyter:
-    image: jupyter/datascience-notebook:r-4.0.3
+    image: exbuilder/jupyter:r-4.0.3
     environment:
       - JUPYTER_TOKEN=${JUPYTER_TOKEN}
       - JUPYTER_ENABLE_LAB=yes
@@ -84,12 +71,12 @@ services:
       - ./${ANALYSES_DIRECTORY}:/home/jovyan/work
     ports:
       - 8989:8888
-    container_name: jupyter
+    container_name: ${PROJECT_NAME}_jupyter
     networks:
       - exbuilder
 
   rstudio:
-    image: "rocker/verse:4.0.4"
+    image: "exbuilder/rstudio:4.0.3"
     environment:
       - USERID=rstudio
       - PASSWORD=${RSTUDIO_PASSWORD}
@@ -97,7 +84,7 @@ services:
       - ./${ANALYSES_DIRECTORY}:/home/rstudio/work
     ports:
       - 8787:8787
-    container_name: rstudio
+    container_name: ${PROJECT_NAME}_rstudio
     networks:
       - exbuilder
   

@@ -7,21 +7,17 @@ networks:
 
 services:
   webserver:
-    build:
-      context: .
-      dockerfile: ./docker/nginx/Dockerfile
-    container_name: nginx
+    image: exbuilder/nginx:stable-alpine
+    container_name: ${PROJECT_NAME}_nginx
     volumes:
-      - ./02-experiments:/var/www/html:delegated
+      - ./${EXPERIMENTS_DIRECTORY}:/var/www/html:delegated
     depends_on:
       - php
 
 
   php:
-    build:
-      context: .
-      dockerfile: ./docker/php/Dockerfile
-    container_name: php
+    image: exbuilder/php:7.4-fpm-alpine
+    container_name: ${PROJECT_NAME}_php
     volumes:
       - ./${EXPERIMENTS_DIRECTORY}:/var/www/html:delegated
     environment:
@@ -30,10 +26,9 @@ services:
       - DB_NAME=${DB_NAME}
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
-      - DB_RUNS_TABLE=experiments.runs
+      - DB_SSLMODE=${DB_SSLMODE}
+      - DB_RUNS_TABLE=${DB_RUNS_TABLE}
       - S3_ENDPOINT=${S3_ENDPOINT}
       - S3_REGION=${S3_REGION}
       - S3_KEY=${S3_KEY}
       - S3_SECRET=${S3_SECRET}
- 
-  

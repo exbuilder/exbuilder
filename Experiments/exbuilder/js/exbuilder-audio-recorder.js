@@ -1,5 +1,4 @@
 var ExbuilderAudioRecorder = {
-
     recording: { // some variables to hold aspects of the recording
         chunks: [],
         blob: [],
@@ -11,11 +10,11 @@ var ExbuilderAudioRecorder = {
         permission: "You must grant the experiment access to your microphone to take part."
     },
 
-    init: function(){
+    init: function(div = "jspsych-target"){
 
         navigator.mediaDevices.getUserMedia( {audio: true, video: false})
         .then(stream => {this.handleAvailableData(stream)})
-        .catch(error => {this.showError(this.warning.permission)});
+        .catch(error => {this.showError(this.warning.permission, div)});
 
     },
 
@@ -44,11 +43,12 @@ var ExbuilderAudioRecorder = {
         }
     },
 
-    showError: function(message){
+    showError: function(message, div){
         // create a p and add the message; append to body
+        let this_div = document.getElementById(div);
         let p = document.createElement("p");
         p.innerHTML = message;
-        document.body.appendChild(p);
+        this_div.appendChild(p);
     },
 
     startRecording: function(){

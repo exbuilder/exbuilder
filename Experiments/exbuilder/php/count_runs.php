@@ -13,8 +13,6 @@
     array($_GET['experiment']))
     or die ("Could not count runs\n");
 
-  //var_dump($res);
-
   $resultArray = pg_fetch_all($res);
   echo json_encode($resultArray);
 

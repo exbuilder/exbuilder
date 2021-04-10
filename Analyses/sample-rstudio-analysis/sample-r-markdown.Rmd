@@ -7,22 +7,64 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+## Load libraries
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+```{r loading}
+#load the tidyverse, but be quiet about it
+options(tidyverse.quiet = TRUE) 
+library(tidyverse)
+library(knitr)
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+#load the libraries for working with the database
+library(DBI)
+library(RPostgreSQL)
+library(getPass)
+library(tidyjson)
 
-```{r cars}
-summary(cars)
+
 ```
 
-## Including Plots
+## Connect to database
 
-You can also embed plots, for example:
+```{r connect}
+#set the db driver to postgres, because that is what the exbuilder's database is
+pgdrv <- dbDriver(drvName = "PostgreSQL")
 
-```{r pressure, echo=FALSE}
-plot(pressure)
+# connect to our database
+db <-DBI::dbConnect(pgdrv,
+                    dbname="exbuilder",
+                    host="postgres", 
+                    port=5432,
+                    user = 'exbuilder',
+                    password = "password") # default is password
+
+# replace password = "password" with password = getPass("Enter password: ") if you want to 
+# instead enter a password. 
+
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+## Query the database
+
+Once connected you can pass sql queries to the database. Don't worry about the unrecognized field error; we'll use the tidyjson library to deal with that. Note that you have to run through the experiment at least once our the query won't have any data to return. :) 
+
+```{r query}
+rawdata <- dbGetQuery(db, "SELECT * FROM experiments.runs")
+
+```
+
+## Turn json data into table
+
+Next we can parse the json from our data column into trial-by-trial data
+
+```{r jsondata}
+
+data <- rawdata %>%
+    as.tbl_json(json.column="data") %>% gather_array %>% spread_all %>%
+    as_tibble() %>%
+    select(!stimulus) #in jspsych this column can contain html which messes up kable
+
+
+kable(head(data))
+
+```

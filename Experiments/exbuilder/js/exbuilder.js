@@ -2,7 +2,7 @@ var Exbuilder = {
     config: {},
     run: {},// holds the url variables 
 
-    init: function(config_file = "../exbuilder/config-exbuilder.json") {
+    init: function(config_file = "../config-exbuilder.json") {
         return new Promise((resolve, reject) => {
 
             this.getConfig(config_file)
@@ -32,7 +32,6 @@ var Exbuilder = {
                 })
                 .catch(err => { reject(err); });
         });
-
     },
 
     getURLVars: function() {
@@ -55,7 +54,7 @@ var Exbuilder = {
                 this.run['randomid'] = '_' + Math.random().toString(36).substr(2, this.config.randomid.length);
                 resolve(this.run.randomid);
             } else {
-                reject("Exbuilder cannot assign random id; length not specified")
+                reject("Exbuilder cannot assign random id; length not specified in config-exbuilder.json")
             }
         })
     },
@@ -83,5 +82,20 @@ var Exbuilder = {
         })
         .then(result => {console.log('Success:', result);})
         .catch(error => {console.error('Error:', error);});
+    },
+
+    countRuns: function() {
+
+        // pass the experiment as a search param
+        let params = new URLSearchParams({experiment: this.run.experiment});
+
+        // get the runs for this experiment in the database
+        fetch('../exbuilder/php/count_runs.php?'+params)
+            .then(response => { return response.json(); })
+            .then(data => { 
+                console.log(data);
+                return data 
+            })
+            .catch(error => {console.log('Error', error)});
     }
 }

@@ -4,7 +4,7 @@ var ExbuilderURLGenerator = {
     experiment: "", // holds the experiment the user selects
     form: "",
 
-    init: function(config_file = "config-exbuilder.json"){
+    init: function(config_file = "../config-exbuilder.json"){
 
         //fetch the config file to kick things off 
         this.getConfig(config_file);
@@ -13,7 +13,7 @@ var ExbuilderURLGenerator = {
     getConfig: function(config_file){
 
         // fetch the config file without cache so the user can see updates when developing
-        fetch('../exbuilder/'+config_file, {
+        fetch(config_file, {
             method: "get",
             headers: {
                 'pragma': 'no-cache',
@@ -67,7 +67,6 @@ var ExbuilderURLGenerator = {
 
         // add the conditions for this experiment (and add a random option)
         let conditions = Object.keys(this.experiment.conditions);
-        conditions.push("random");
         
         // make the selector for the conditions
         this.makeSelectElement("condition", conditions, "Select a condition");
@@ -98,7 +97,6 @@ var ExbuilderURLGenerator = {
         // create the select element and add it to the dom
         let select = document.createElement("select");
         select.setAttribute('class', "form-select");
-        //select.setAttribute('form', "exbuilder-form");
         select.setAttribute('id', name);
         select.setAttribute('name', name)
         div.appendChild(select);
@@ -148,13 +146,14 @@ var ExbuilderURLGenerator = {
 
     makeButton: function(){
 
+        // make a div for the button
         let div = this.makeRowDiv();
 
+        // add button attributes and append to the div
         let btn = document.createElement('input');
         btn.setAttribute('type', "submit");
         btn.setAttribute('class', "btn btn-primary");
         btn.innerHTML = "Run experiment";
-        // btn.setAttribute('id', );
         div.appendChild(btn);
 
     }
