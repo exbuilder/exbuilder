@@ -6,7 +6,7 @@
   use Aws\S3\S3Client;
 
 
-  // configure your s3 bucket (digital ocean or AWS)
+  // configure your s3 client (digital ocean or AWS)
   $client = new Aws\S3\S3Client([
     'version' => 'latest',
     'region'  => getenv('S3_REGION'),
@@ -17,6 +17,8 @@
         ],
   ]);
 
+  $bucket = getenv('S3_BUCKET');
+  
   // configure database
   $database = (object) [
     'host' => getenv('DB_HOST'),

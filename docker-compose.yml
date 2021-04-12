@@ -33,6 +33,7 @@ services:
       - DB_SSLMODE=${DB_SSLMODE}
       - S3_ENDPOINT=${S3_ENDPOINT}
       - S3_REGION=${S3_REGION}
+      - S3_BUCKET=${S3_BUCKET}
       - S3_KEY=${S3_KEY}
       - S3_SECRET=${S3_SECRET}
     ports:
@@ -66,7 +67,6 @@ services:
     environment:
       - JUPYTER_TOKEN=${JUPYTER_TOKEN}
       - JUPYTER_ENABLE_LAB=yes
-
     volumes:
       - ./${ANALYSES_DIRECTORY}:/home/jovyan/work
     ports:

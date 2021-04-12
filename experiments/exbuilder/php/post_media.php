@@ -8,8 +8,6 @@
     print_r($_FILES);
     print_r($_REQUEST);
 
-    $bucket = 'childlanglab-permalink-media';
-
     // create an uploader object
     $uploader = new ObjectUploader(
         $client, // the s3 client (from config.php)
