@@ -110,9 +110,9 @@ var ExbuilderURLGenerator = {
                 let opt = document.createElement("option");
                 opt.value = option;
                 opt.text = option;
-                if (option === "random"){
-                    opt.disabled = true;
-                }
+                // if (option === "random"){
+                //     opt.disabled = true;
+                // }
                 select.appendChild(opt);
             }
         )          
